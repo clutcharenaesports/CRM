@@ -143,6 +143,38 @@ export function LeadDrawer({ lead, isOpen, onClose }) {
               </div>
             )}
 
+            {/* Documents */}
+            <div className="timeline-header" style={{ marginTop: 24 }}>
+              <h3 className="section-title" style={{ marginBottom: 0 }}>Documents (KYC)</h3>
+              <button 
+                className="btn btn-ghost"
+                style={{ color: 'var(--color-primary)', padding: '4px 8px', height: 'auto', fontSize: 13 }}
+                onClick={() => alert("File upload simulation: MVP only stores reference data.")}
+              >
+                + Upload
+              </button>
+            </div>
+            <div className="drawer-cards-grid" style={{ marginBottom: 24, gridTemplateColumns: '1fr 1fr' }}>
+              <div className="drawer-card" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                <div style={{ background: 'var(--color-success)', color: '#fff', padding: 8, borderRadius: '50%' }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+                <div>
+                  <div style={{ fontWeight: 600, fontSize: 13 }}>Aadhar Card</div>
+                  <div style={{ fontSize: 11, color: 'var(--color-muted-fg)' }}>Verified • {lead.name}</div>
+                </div>
+              </div>
+              <div className="drawer-card" style={{ display: 'flex', alignItems: 'center', gap: 12, opacity: 0.5 }}>
+                <div style={{ background: 'var(--color-muted)', color: 'var(--color-muted-fg)', padding: 8, borderRadius: '50%' }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                </div>
+                <div>
+                  <div style={{ fontWeight: 600, fontSize: 13 }}>PAN Card</div>
+                  <div style={{ fontSize: 11, color: 'var(--color-muted-fg)' }}>Pending</div>
+                </div>
+              </div>
+            </div>
+
             {/* Timeline */}
             <div className="timeline-header">
               <h3 className="section-title" style={{ marginBottom: 0 }}>Activity Timeline</h3>

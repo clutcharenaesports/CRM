@@ -8,6 +8,10 @@ import { Leads } from './pages/Leads';
 import { Properties } from './pages/Properties';
 import { Calendar } from './pages/Calendar';
 import { Telephony } from './pages/Telephony';
+import { Deals } from './pages/Deals';
+import { KanbanBoard } from './pages/KanbanBoard';
+import { Team } from './pages/Team';
+import { Settings } from './pages/Settings';
 import { useAuthStore } from './store/authStore';
 import { useUiStore } from './store/uiStore';
 import { LayoutDashboard, Users, Building2, CalendarDays, PhoneCall } from 'lucide-react';
@@ -45,6 +49,9 @@ const AppLayout = () => {
           <Route path="properties" element={<Properties />} />
           <Route path="calendar" element={<Calendar />} />
           <Route path="telephony" element={<Telephony />} />
+          <Route path="deals" element={<Deals />} />
+          <Route path="team" element={<Team />} />
+          <Route path="settings" element={<Settings />} />
           <Route path="*" element={<Navigate to="leads" replace />} />
         </Routes>
       </main>

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Building2, LayoutDashboard, Users, CalendarDays, PhoneCall, Copy, Moon, Sun, Menu } from 'lucide-react';
+import { Building2, LayoutDashboard, Users, CalendarDays, PhoneCall, Copy, Moon, Sun, Menu, Search } from 'lucide-react';
 import { useAuthStore } from '../store/authStore';
 import { useUiStore } from '../store/uiStore';
 import { HELPLINE_NUMBER } from '../utils/constants';
@@ -10,10 +10,10 @@ import './Header.css';
 export function Header() {
   const { currentUser, logout } = useAuthStore();
   const { theme, toggleTheme, toggleSidebar } = useUiStore();
+  const [searchQuery, setSearchQuery] = useState('');
 
   const handleCopyHelpline = () => {
     navigator.clipboard.writeText(HELPLINE_NUMBER);
-    // In a real app we'd trigger a toast here
     alert('Helpline number copied to clipboard');
   };
 
@@ -29,6 +29,26 @@ export function Header() {
         <div className="header-logo">
           <div className="logo-icon">P</div>
           <span className="logo-text">PropDesk</span>
+        </div>
+
+        {/* Search Bar */}
+        <div className="header-search">
+          <div className="search-input-wrapper">
+            <Search size={16} className="search-icon" />
+            <input 
+              type="text"
+              className="form-input" 
+              placeholder="Search leads, properties..." 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            {searchQuery && (
+              <div style={{ position: 'absolute', top: 40, left: 0, right: 0, background: 'var(--color-card)', border: '1px solid var(--color-border)', borderRadius: 'var(--border-radius-md)', padding: 12, boxShadow: '0 4px 12px rgba(0,0,0,0.1)', zIndex: 100 }}>
+                <div style={{ fontSize: 13, color: 'var(--color-muted-fg)', fontStyle: 'italic' }}>Search simulation for MVP...</div>
+                <div style={{ marginTop: 8, fontSize: 14, fontWeight: 500 }}>No exact matches for "{searchQuery}"</div>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Navigation Tabs (Desktop) */}
@@ -48,6 +68,19 @@ export function Header() {
           <NavLink to="/app/telephony" className={({ isActive }) => `nav-tab ${isActive ? 'active' : ''}`}>
             Calls
           </NavLink>
+          <NavLink to="/app/deals" className={({ isActive }) => `nav-tab ${isActive ? 'active' : ''}`}>
+            Deals
+          </NavLink>
+          {currentUser?.role === 'admin' && (
+            <>
+              <NavLink to="/app/team" className={({ isActive }) => `nav-tab ${isActive ? 'active' : ''}`}>
+                Team
+              </NavLink>
+              <NavLink to="/app/settings" className={({ isActive }) => `nav-tab ${isActive ? 'active' : ''}`}>
+                Settings
+              </NavLink>
+            </>
+          )}
         </nav>
 
         <div className="header-actions">

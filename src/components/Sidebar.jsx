@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Users, Building2, CalendarDays, PhoneCall, X } from 'lucide-react';
+import { LayoutDashboard, Users, Building2, CalendarDays, PhoneCall, IndianRupee, X, Shield, Settings } from 'lucide-react';
 import { useUiStore } from '../store/uiStore';
 import { useLeadStore } from '../store/leadStore';
 import { useAuthStore } from '../store/authStore';
@@ -48,12 +48,29 @@ export function Sidebar() {
           <NavLink to="/app/properties" className="sidebar-nav-item" onClick={toggleSidebar}>
             <Building2 size={18} /> Properties
           </NavLink>
+          <NavLink to="/app/deals" className="sidebar-nav-item" onClick={toggleSidebar}>
+            <IndianRupee size={18} /> Deals
+          </NavLink>
           <NavLink to="/app/calendar" className="sidebar-nav-item" onClick={toggleSidebar}>
             <CalendarDays size={18} /> Visits
           </NavLink>
           <NavLink to="/app/telephony" className="sidebar-nav-item" onClick={toggleSidebar}>
             <PhoneCall size={18} /> Calls
           </NavLink>
+          
+          {currentUser?.role === 'admin' && (
+            <div style={{ marginTop: 24, padding: '0 12px', fontSize: 12, fontWeight: 600, color: 'var(--color-muted-fg)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 8 }}>Admin</div>
+          )}
+          {currentUser?.role === 'admin' && (
+            <NavLink to="/app/team" className="sidebar-nav-item" onClick={toggleSidebar}>
+              <Shield size={18} /> Team
+            </NavLink>
+          )}
+          {currentUser?.role === 'admin' && (
+            <NavLink to="/app/settings" className="sidebar-nav-item" onClick={toggleSidebar}>
+              <Settings size={18} /> Settings
+            </NavLink>
+          )}
         </nav>
 
         {/* Filters Section */}
